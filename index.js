@@ -1,6 +1,6 @@
 const Express = require('express');
 const app = Express();
-const { getMiqStatus } = require('./src/info');
+const { getMiqStatus } = require('./src/getMiqStatus');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());

@@ -48,7 +48,7 @@ exports.getMiqStatus = async (req, res) => {
     if (miqPortalRes.statusCode === 200) {
         const root = parse(miqPortalRes.body);
         const targetNode = root.querySelector(`.mo-${TARGET_MONTH}-2021`);
-        message = (!_.isEmpty(targetNode) ? targetMonthReleasedText() : targetMonthNotReleasedText();
+        message = !_.isEmpty(targetNode) ? targetMonthReleasedText() : targetMonthNotReleasedText();
     } else {
         message = unableToReachSiteText(miqPortalRes.statusCode);
     }
