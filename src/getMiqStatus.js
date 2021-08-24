@@ -46,6 +46,7 @@ exports.getMiqStatus = async (req, res) => {
     const responseUrl = req.body.response_url;
     const miqPortalRes = await fetchMiqPortalDocument();
     if (miqPortalRes.statusCode === 200) {
+        console.log(`https://allocation.miq.govt.nz/portal/`);
         const root = parse(miqPortalRes.body);
         const targetNode = root.querySelector(`.mo-${TARGET_MONTH}-2021`);
         message = !_.isEmpty(targetNode) ? targetMonthReleasedText() : targetMonthNotReleasedText();
