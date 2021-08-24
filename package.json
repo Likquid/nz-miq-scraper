@@ -1,0 +1,14 @@
+{
+  "name": "nz-miq-scraper",
+  "version": "1.0.0",
+  "description": "Server to scrape nz miq ticketing system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Billy Li",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
