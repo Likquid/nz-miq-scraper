@@ -44,6 +44,7 @@ exports.sendMessageToChannel = async (channelId, messagePayload = {}) => {
             responseType: "json",
             throwHttpErrors: false
         };
+        console.log(`Sending message to slack channel`);
         return await got.post(`https://slack.com/api/chat.postMessage`, options);
     } catch (err) {
         console.log(`Error fetching all channels from slack: ${JSON.stringify(err)}`);
