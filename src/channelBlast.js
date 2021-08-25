@@ -2,11 +2,10 @@ const _ = require('lodash');
 const { parse } = require('node-html-parser');
 const { fetchMiqPortalDocument } = require('./util/fetchMiqDocument');
 const { TARGET_MONTH, unableToReachSiteText, targetMonthNotReleasedText, targetMonthReleasedText } = require('./util/messageFormatter')
-const { sendSlashCommandMessageResponse } = require('./service/slackAdapter');
+const { fetchChannelIdByName, sendMessageToChannel } = require('./service/slackAdapter');
 
-exports.getMiqStatus = async (req, res) => {
+exports.channelBlast = async (req, res) => {
     let messagePayload = {};
-    const responseUrl = req.body.response_url;
     const miqPortalRes = await fetchMiqPortalDocument();
     if (miqPortalRes.statusCode === 200) {
         console.log(`https://allocation.miq.govt.nz/portal/ retuned with ${miqPortalRes.statusCode}`);
@@ -16,6 +15,7 @@ exports.getMiqStatus = async (req, res) => {
     } else {
         messagePayload = unableToReachSiteText(miqPortalRes.statusCode);
     }
+    const channelId = await fetchChannelIdByName(process.env.CHANNEL_NAME);
     res.status(200).send();
-    return await sendSlashCommandMessageResponse(responseUrl, messagePayload);
+    return await sendMessageToChannel(channelId, messagePayload);
 };
